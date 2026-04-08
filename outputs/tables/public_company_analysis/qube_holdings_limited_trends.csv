@@ -1,0 +1,15 @@
+metric,metric_key,slope,status,comment,pass,FY-2,FY2023,FY2024
+Revenue,revenue,468799999.9999998,POSITIVE,Revenue trend is increasing across the observed periods.,1,,2862600000.0,3331400000.0
+EBITDA / PBDIT,ebitda,91999999.9999999,POSITIVE,"EBITDA/PBDIT is improving, consistent with stronger operating earnings.",1,,551200000.0,643200000.0
+EBITDA Margin,ebitda_margin,0.0005197564996416902,POSITIVE,EBITDA margin is expanding.,1,,0.19255222524977295,0.19307198174941467
+EBIT / Operating Profit,ebit,61199999.999999925,POSITIVE,Operating profit is increasing.,1,,274600000.0,335800000.0
+Working Capital,working_capital,369799999.99999994,POSITIVE,Working capital is positive and improving.,1,,-157700000.0,212100000.0
+Debt / EBITDA,debt_to_ebitda,-0.06365510076612624,POSITIVE,"Debt / EBITDA is trending down, which is supportive for credit.",1,,3.6972060957910013,3.6335509950248754
+Debt / Cash Flow,debt_to_cashflow,0.08047135389055042,NEGATIVE,"Debt / Cash Flow is increasing, which may stress repayment capacity.",0,,5.198724489795918,5.27919584368647
+Interest Coverage (EBIT / Interest),icr,-0.3605894616988378,NEGATIVE,Interest coverage is declining.,0,,3.1635944700460827,2.8030050083472453
+Current Ratio,current_ratio,0.4298187317148254,POSITIVE,Current ratio is improving.,1,,0.8419997996192766,1.2718185313341022
+Operating Cash Flow,operating_cash_flow,50699999.99999989,POSITIVE,"Operating cash flow is improving, matching the lectures cash-flow test.",1,,392000000.0,442700000.0
+Liquidity (Cash in Hand),cash,-6800000.000000029,NEGATIVE,Liquidity (Cash in Hand) trend is negative.,0,,191700000.0,184900000.0
+Net Worth / Total Equity,net_worth,79599999.99999951,POSITIVE,"Net worth is increasing, which is supportive of credit quality.",1,,3032300000.0,3111900000.0
+Equity Infusion / Share Capital,share_capital,4299999.999999321,POSITIVE,"Equity infusion is increasing, indicating greater support from shareholders / owners.",1,,2719600000.0,2723900000.0
+Free Cash Flow,free_cash_flow,-54099999.99999993,NEGATIVE,Free cash flow is deteriorating.,0,,-189800000.0,-243900000.0

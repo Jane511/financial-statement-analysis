@@ -1,0 +1,20 @@
+topic,status,comment,driver
+Revenue trend,POSITIVE,Revenue trend is increasing across the observed periods.,2162571000.0
+EBITDA / PBDIT trend,POSITIVE,"EBITDA/PBDIT is improving, consistent with stronger operating earnings.",166083000.0
+EBITDA Margin trend,POSITIVE,EBITDA margin is expanding.,0.07679886579446409
+EBIT / Operating Profit trend,POSITIVE,Operating profit is increasing.,122932000.0
+Working Capital trend,POSITIVE,Working capital is positive and improving.,254832000.0
+Debt / EBITDA trend,POSITIVE,"Debt / EBITDA is trending down, which is supportive for credit.",0.48348115099076966
+Debt / Cash Flow trend,NEGATIVE,"Debt / Cash Flow is increasing, which may stress repayment capacity.",0.9908562543960315
+Interest Coverage (EBIT / Interest) trend,POSITIVE,Interest coverage is improving.,32.41877637130802
+Current Ratio trend,NEGATIVE,Current Ratio trend is negative.,1.5747200057735418
+Operating Cash Flow trend,NEGATIVE,Operating cash flow is deteriorating.,81039000.0
+Liquidity (Cash in Hand) trend,NEGATIVE,Liquidity (Cash in Hand) trend is negative.,205829000.0
+Net Worth / Total Equity trend,POSITIVE,"Net worth is increasing, which is supportive of credit quality.",497836000.0
+Equity Infusion / Share Capital trend,POSITIVE,"Equity infusion is increasing, indicating greater support from shareholders / owners.",150120000.0
+Free Cash Flow trend,NEGATIVE,Free cash flow is deteriorating.,6038000.0
+Working capital quality,GREEN,Positive WC supported by cash; debt not needed for short-term support,254832000
+Merton PD review,GREEN,Very low PD,2.804168880859259e-05
+Z-score review,GREEN,Z-score: 3.932 (SAFE zone),3.932
+IC decision,GREEN,APPROVE,B
+Risk-based pricing,GREEN,Pricing is within a normal SME risk range.,0.10140373905745874

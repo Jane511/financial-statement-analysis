@@ -46,6 +46,11 @@ CASH_FLOW_LINES = [
 PERIOD_ORDER = ["FY-2", "FY-1", "FY0"]
 
 
+def _available_periods(periods: list[str]) -> list[str]:
+    """Return known period labels in display order."""
+    return [period for period in PERIOD_ORDER if period in periods]
+
+
 def spread_borrower(df: pd.DataFrame, borrower_id: int) -> pd.DataFrame:
     """
     Pivot a single borrower's long-format data into a wide spread template.
@@ -65,10 +70,11 @@ def spread_borrower(df: pd.DataFrame, borrower_id: int) -> pd.DataFrame:
     bdf = df[df["borrower_id"] == borrower_id].copy()
     bdf["period"] = pd.Categorical(bdf["period"], categories=PERIOD_ORDER, ordered=True)
     bdf = bdf.sort_values("period")
+    periods = _available_periods(bdf["period"].astype(str).tolist())
 
     all_lines = INCOME_STATEMENT_LINES + BALANCE_SHEET_LINES + CASH_FLOW_LINES
     spread = bdf.set_index("period")[all_lines].T
-    spread.columns = PERIOD_ORDER
+    spread = spread.reindex(columns=periods)
     spread.index.name = "line_item"
     return spread
 
@@ -137,7 +143,7 @@ def format_spread_display(spread: pd.DataFrame, borrower_name: str = "") -> pd.D
     display_df.index = display_df.index.map(lambda x: label_map.get(x, x))
 
     # Format numbers as A$'000
-    for col in PERIOD_ORDER:
+    for col in _available_periods(display_df.columns.astype(str).tolist()):
         display_df[col] = display_df[col].apply(lambda x: f"${x / 1000:,.0f}k" if pd.notna(x) else "")
 
     return display_df

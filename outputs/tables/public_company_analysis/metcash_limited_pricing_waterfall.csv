@@ -1,0 +1,13 @@
+Component,Rate,Comment
+Base risk-free rate,0.0464,Active AU risk-free rate
++ Funding spread,0.02,Bank cost of wholesale funding
++ Operating / servicing spread,0.015,Admin and operational costs
++ Capital / target return spread,0.015,Required return on capital
++ PVEL spread,0.0006770803532100527,Core expected-loss spread
++ Credit score overlay,0.005,Scorecard-driven adjustment
++ PD overlay,0.0,Merton PD-driven adjustment
++ Leverage overlay,0.005,Debt/EBITDA-driven adjustment
++ Liquidity overlay,0.0,Working capital quality adjustment
++ ICR/DSCR overlay,0.005,Cash flow serviceability adjustment
+= Total model margin,0.06567708035321006,All overlays combined
+= Indicative all-in rate,0.11207708035321005,Pricing is within a normal SME risk range.

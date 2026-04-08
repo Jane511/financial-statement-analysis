@@ -1,0 +1,15 @@
+metric,actual,rule,pass,weight
+Z-score FY0,3.932,>= 1.8,1,0.06
+Z-score trend,DOWN,UP or FLAT,0,0.03
+Debt / EBITDA,0.48348115099076966,<= 4.0x,1,0.07
+DSCR,10.049479166666666,>= 1.20x,1,0.09
+ICR (EBIT / Interest),32.41877637130802,>= 2.0x,1,0.07
+FCCR,2.3114918372743594,>= 1.20x,1,0.07
+Current Ratio,1.5747200057735418,>= 1.20x,1,0.04
+Quick Ratio,1.550002029760804,>= 0.80x,1,0.04
+Free Cash Flow FY0,6038000,> 0,1,0.09
+Tangible Net Worth FY0,480413000,> 0,1,0.07
+Merton PD,2.804168880859259e-05,<= 10%,1,0.07
+Working Capital Flag,GREEN,not RED,1,0.05
+Selected Sigma,0.6,<= 50%,0,0.03
+Core Trend Flags,9,>= 7 of 8,1,0.06

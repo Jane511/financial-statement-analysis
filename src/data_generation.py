@@ -49,6 +49,14 @@ INDUSTRY_PROFILES = {
         "sector_sigma": 0.60,
         "expected_return": 0.0700,
     },
+    "Health Care": {
+        "revenue_range": (5_000_000, 80_000_000),
+        "ebitda_margin": (0.10, 0.22),
+        "growth_mean": 0.05,
+        "growth_std": 0.08,
+        "sector_sigma": 0.45,
+        "expected_return": 0.0680,
+    },
     "Transport & Logistics": {
         "revenue_range": (4_000_000, 40_000_000),
         "ebitda_margin": (0.08, 0.16),
@@ -56,6 +64,14 @@ INDUSTRY_PROFILES = {
         "growth_std": 0.09,
         "sector_sigma": 0.52,
         "expected_return": 0.0750,
+    },
+    "Wholesale Trade": {
+        "revenue_range": (5_000_000, 80_000_000),
+        "ebitda_margin": (0.04, 0.10),
+        "growth_mean": 0.04,
+        "growth_std": 0.07,
+        "sector_sigma": 0.48,
+        "expected_return": 0.0700,
     },
 }
 

@@ -45,7 +45,7 @@ METRIC_LABELS = {
 
 # Auto-comment templates
 POSITIVE_COMMENTS = {
-    "revenue": "Revenue trend is increasing across the 3 observed periods.",
+    "revenue": "Revenue trend is increasing across the observed periods.",
     "ebitda": "EBITDA/PBDIT is improving, consistent with stronger operating earnings.",
     "ebitda_margin": "EBITDA margin is expanding.",
     "ebit": "Operating profit is increasing.",
@@ -147,6 +147,7 @@ def analyse_trends(
     bdf = df_with_ratios[df_with_ratios["borrower_id"] == borrower_id].copy()
     bdf["period"] = pd.Categorical(bdf["period"], categories=["FY-2", "FY-1", "FY0"], ordered=True)
     bdf = bdf.sort_values("period")
+    period_labels = bdf["period"].astype(str).tolist()
 
     rows = []
     for metric in metrics:
@@ -158,17 +159,19 @@ def analyse_trends(
         comment = get_auto_comment(metric, status)
         passed = 1 if status == "POSITIVE" else 0
 
-        rows.append({
+        row = {
             "metric": METRIC_LABELS.get(metric, metric),
             "metric_key": metric,
-            "FY-2": values[0] if len(values) > 0 else np.nan,
-            "FY-1": values[1] if len(values) > 1 else np.nan,
-            "FY0": values[2] if len(values) > 2 else np.nan,
             "slope": slope,
             "status": status,
             "comment": comment,
             "pass": passed,
-        })
+        }
+        for period in ["FY-2", "FY-1", "FY0"]:
+            row[period] = np.nan
+        for period, value in zip(period_labels, values):
+            row[period] = value
+        rows.append(row)
 
     return pd.DataFrame(rows)
 

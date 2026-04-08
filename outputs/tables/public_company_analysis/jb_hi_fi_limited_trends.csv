@@ -1,0 +1,15 @@
+metric,metric_key,slope,status,comment,pass,FY-2,FY2023,FY2024
+Revenue,revenue,-34000000.000001736,NEGATIVE,"Revenue is declining, which warrants further investigation.",0,,9626400000.0,9592400000.0
+EBITDA / PBDIT,ebitda,-108900000.00000031,NEGATIVE,EBITDA/PBDIT is deteriorating — earnings quality may be weakening.,0,,993200000.0,884300000.0
+EBITDA Margin,ebitda_margin,-0.010987038018854877,NEGATIVE,EBITDA margin is compressing.,0,,0.10317460317460317,0.0921875651557483
+EBIT / Operating Profit,ebit,-121800000.00000001,NEGATIVE,Operating profit is declining.,0,,769000000.0,647200000.0
+Working Capital,working_capital,61099999.99999996,POSITIVE,Working capital is positive and improving.,1,,214400000.0,275500000.0
+Debt / EBITDA,debt_to_ebitda,0.08382768971719437,NEGATIVE,"Debt / EBITDA is increasing, indicating rising leverage.",0,,0.6595851792186871,0.7434128689358815
+Debt / Cash Flow,debt_to_cashflow,-0.040928095462994425,POSITIVE,"Debt / Cash Flow is trending down, which is supportive for repayment capacity.",1,,0.9144332774986041,0.8735051820356099
+Interest Coverage (EBIT / Interest),icr,-8.362124371397032,NEGATIVE,Interest coverage is declining.,0,,29.23954372623574,20.87741935483871
+Current Ratio,current_ratio,0.029233451611240684,POSITIVE,Current ratio is improving.,1,,1.1809435395392016,1.2101769911504425
+Operating Cash Flow,operating_cash_flow,36199999.99999983,POSITIVE,"Operating cash flow is improving, matching the lectures cash-flow test.",1,,716400000.0,752600000.0
+Liquidity (Cash in Hand),cash,140399999.99999994,POSITIVE,"Cash on hand is increasing, which supports day-to-day liquidity.",1,,177300000.0,317700000.0
+Net Worth / Total Equity,net_worth,139499999.9999998,POSITIVE,"Net worth is increasing, which is supportive of credit quality.",1,,1419600000.0,1559100000.0
+Equity Infusion / Share Capital,share_capital,-17000000.000000037,NEGATIVE,Equity Infusion / Share Capital trend is negative.,0,,329300000.0,312300000.0
+Free Cash Flow,free_cash_flow,117899999.99999993,POSITIVE,"Free cash flow is improving, supporting internal debt repayment.",1,,261700000.0,379600000.0

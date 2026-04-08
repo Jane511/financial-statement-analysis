@@ -1,0 +1,15 @@
+metric,metric_key,slope,status,comment,pass,FY-2,FY2024,FY2025
+Revenue,revenue,146655999.99999958,POSITIVE,Revenue trend is increasing across the observed periods.,1,,2015915000.0,2162571000.0
+EBITDA / PBDIT,ebitda,31885999.999999963,POSITIVE,"EBITDA/PBDIT is improving, consistent with stronger operating earnings.",1,,134197000.0,166083000.0
+EBITDA Margin,ebitda_margin,0.010230086852891635,POSITIVE,EBITDA margin is expanding.,1,,0.06656877894157244,0.07679886579446409
+EBIT / Operating Profit,ebit,27200999.99999998,POSITIVE,Operating profit is increasing.,1,,95731000.0,122932000.0
+Working Capital,working_capital,29454999.99999995,POSITIVE,Working capital is positive and improving.,1,,225377000.0,254832000.0
+Debt / EBITDA,debt_to_ebitda,-0.21877001706812896,POSITIVE,"Debt / EBITDA is trending down, which is supportive for credit.",1,,0.7022511680588985,0.48348115099076966
+Debt / Cash Flow,debt_to_cashflow,0.48888009613292,NEGATIVE,"Debt / Cash Flow is increasing, which may stress repayment capacity.",0,,0.5019761582631114,0.9908562543960315
+Interest Coverage (EBIT / Interest),icr,7.133250750600147,POSITIVE,Interest coverage is improving.,1,,25.285525620707872,32.41877637130802
+Current Ratio,current_ratio,-0.07500799736299883,NEGATIVE,Current Ratio trend is negative.,0,,1.6497280031365404,1.5747200057735418
+Operating Cash Flow,operating_cash_flow,-106699000.00000004,NEGATIVE,Operating cash flow is deteriorating.,0,,187738000.0,81039000.0
+Liquidity (Cash in Hand),cash,-20035000.00000003,NEGATIVE,Liquidity (Cash in Hand) trend is negative.,0,,225864000.0,205829000.0
+Net Worth / Total Equity,net_worth,32241999.999999903,POSITIVE,"Net worth is increasing, which is supportive of credit quality.",1,,465594000.0,497836000.0
+Equity Infusion / Share Capital,share_capital,4338999.999999984,POSITIVE,"Equity infusion is increasing, indicating greater support from shareholders / owners.",1,,145781000.0,150120000.0
+Free Cash Flow,free_cash_flow,-48643999.99999999,NEGATIVE,Free cash flow is deteriorating.,0,,54682000.0,6038000.0

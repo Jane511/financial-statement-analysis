@@ -1,0 +1,15 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*.py[cod].*
+
+# Notebook cache
+.ipynb_checkpoints/
+
+# Raw source financial statements
+data/financials/
+
+# Ignore generated presentation outputs and local runtime cache
+outputs/.mplconfig/
+outputs/figures/
+outputs/reports/

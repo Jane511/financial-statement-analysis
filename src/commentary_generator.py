@@ -29,6 +29,7 @@ def generate_borrower_commentary(
     merton: dict,
     zscore_detail: dict,
     pricing: dict,
+    period_labels: list[str] | None = None,
 ) -> str:
     """
     Generate a full credit committee narrative for a single borrower.
@@ -57,6 +58,12 @@ def generate_borrower_commentary(
         Multi-paragraph credit narrative.
     """
     sections = []
+    if period_labels is None:
+        period_labels = [
+            col for col in ["FY-2", "FY-1", "FY0"]
+            if col in trends.columns and not trends[col].isna().all()
+        ]
+    period_descriptor = ", ".join(period_labels) if period_labels else "FY0"
 
     # 1. Borrower overview
     rev_m = revenue_fy0 / 1_000_000
@@ -64,8 +71,8 @@ def generate_borrower_commentary(
         f"BORROWER OVERVIEW\n"
         f"{borrower_name} operates in the {industry} sector with FY0 revenue of "
         f"A${rev_m:,.1f}M. The business has been assessed under the bank's SME "
-        f"credit framework using 3 periods of financial data (FY-2 audited, "
-        f"FY-1 audited, FY0 management accounts)."
+        f"credit framework using {len(period_labels) if period_labels else 1} "
+        f"periods of financial data ({period_descriptor})."
     )
 
     # 2. Financial trends
