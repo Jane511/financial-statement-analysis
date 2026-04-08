@@ -1,0 +1,15 @@
+metric,metric_key,FY-2,FY-1,FY0,slope,status,comment,pass
+Revenue,revenue,18000000.0,20000000.0,22500000.0,2249999.9999999986,POSITIVE,Revenue trend is increasing across the 3 observed periods.,1
+EBITDA / PBDIT,ebitda,2300000.0,2800000.0,3150000.0,424999.99999999936,POSITIVE,"EBITDA/PBDIT is improving, consistent with stronger operating earnings.",1
+EBITDA Margin,ebitda_margin,0.12777777777777777,0.14,0.14,0.006111111111111108,POSITIVE,EBITDA margin is expanding.,1
+EBIT / Operating Profit,ebit,1950000.0,2350000.0,2700000.0,375000.00000000023,POSITIVE,Operating profit is increasing.,1
+Working Capital,working_capital,1800000.0,2200000.0,2700000.0,449999.9999999999,POSITIVE,Working capital is positive and improving.,1
+Debt / EBITDA,debt_to_ebitda,2.8260869565217392,2.2142857142857144,1.9047619047619047,-0.46066252587991746,POSITIVE,"Debt / EBITDA is trending down, which is supportive for credit.",1
+Debt / Cash Flow,debt_to_cashflow,4.333333333333333,3.263157894736842,2.6666666666666665,-0.8333333333333334,POSITIVE,"Debt / Cash Flow is trending down, which is supportive for repayment capacity.",1
+Interest Coverage (EBIT / Interest),icr,2.7857142857142856,3.6153846153846154,4.5,0.8571428571428571,POSITIVE,Interest coverage is improving.,1
+Current Ratio,current_ratio,1.45,1.5238095238095237,1.6,0.07500000000000008,POSITIVE,Current ratio is improving.,1
+Operating Cash Flow,operating_cash_flow,1500000.0,1900000.0,2250000.0,375000.00000000006,POSITIVE,"Operating cash flow is improving, matching the lectures cash-flow test.",1
+Liquidity (Cash in Hand),cash,1200000.0,1500000.0,1800000.0,299999.9999999999,POSITIVE,"Cash on hand is increasing, which supports day-to-day liquidity.",1
+Net Worth / Total Equity,net_worth,2000000.0,2800000.0,3500000.0,750000.0,POSITIVE,"Net worth is increasing, which is supportive of credit quality.",1
+Equity Infusion / Share Capital,share_capital,1200000.0,1300000.0,1400000.0,99999.99999999996,POSITIVE,"Equity infusion is increasing, indicating greater support from shareholders / owners.",1
+Free Cash Flow,free_cash_flow,950000.0,1220000.0,1450000.0,249999.9999999999,POSITIVE,"Free cash flow is improving, supporting internal debt repayment.",1

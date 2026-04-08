@@ -1,0 +1,29 @@
+CREDIT PAPER — Example AU SME Pty Ltd
+Date: FY0 Assessment
+Analyst: Automated
+======================================================================
+
+BORROWER OVERVIEW
+Example AU SME Pty Ltd operates in the Manufacturing sector with FY0 revenue of A$22.5M. The business has been assessed under the bank's SME credit framework using 3 periods of financial data (FY-2 audited, FY-1 audited, FY0 management accounts).
+
+FINANCIAL TRENDS
+14 of 14 monitored metrics show positive trends. No negative trends were identified.
+
+WORKING CAPITAL
+Working capital flag: GREEN. Positive WC supported by cash; debt not needed for short-term support. Cash represents 25% of current assets.
+
+REPAYMENT CAPACITY
+DSCR: 1.88x (threshold: >= 1.20x). ICR: 4.50x (threshold: >= 2.0x). Free cash flow is the primary repayment source, which is preferred.
+
+CREDIT QUALITY
+Altman Z-score: 2.885 (GREY zone). Merton PD: 5.44% (Moderate PD). PVEL: A$63,706.
+
+SCORECARD & PRICING
+Weighted IC score: 84.00%. Internal grade: A. Decision: APPROVE. Indicative all-in rate: 12.20%. Pricing is within a normal SME risk range.
+
+RECOMMENDED COVENANTS
+- Debt / EBITDA: <= 4.0x (tested semi-annually)
+- ICR (EBIT / Interest): >= 2.0x (tested semi-annually)
+- DSCR: >= 1.20x (tested annually)
+- Provision of annual audited financial statements within 120 days of year-end
+- Provision of interim management accounts within 45 days of half-year
