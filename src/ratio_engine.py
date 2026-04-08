@@ -12,7 +12,7 @@ Ratio categories match what banks assess for commercial cash flow lending:
   - Efficiency (asset utilisation)
   - Growth (revenue and earnings momentum)
 
-Aligns with Commercial Ready course "Four Measures of Capacity":
+Aligns with standard bank credit framework "Four Measures of Capacity":
   1. ICR (Interest Cover Ratio)
   2. DSCR (Debt Service Cover Ratio)
   3. Payback / Debt Ratio
@@ -62,7 +62,7 @@ def calculate_ratios(df: pd.DataFrame) -> pd.DataFrame:
 
     # --- Coverage (the "Four Measures of Capacity") ---
     # 1. ICR — Interest Cover Ratio (EBIT / Interest)
-    #    Commercial Ready: "EBITO / Total Interest"
+    #    bank credit framework: "EBITO / Total Interest"
     out["icr"] = _safe_divide(out["ebit"], out["interest_expense"])
 
     # EBITDA-based interest coverage (used in Derived_Ratios sheet)
@@ -75,7 +75,7 @@ def calculate_ratios(df: pd.DataFrame) -> pd.DataFrame:
     out["dscr"] = _safe_divide(out["operating_cash_flow"], total_debt_service)
 
     # 3. Payback / Debt Ratio — (Total Debt - Cash) / EBITDA
-    #    Commercial Ready: "Total Proposed Debt - Cash / Total EBITDAO"
+    #    bank credit framework: "Total Proposed Debt - Cash / Total EBITDAO"
     out["payback_ratio"] = _safe_divide(out["total_debt"] - out["cash"], out["ebitda"])
 
     # 4. Fixed Charge Coverage Ratio (FCCR)

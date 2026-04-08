@@ -1,10 +1,10 @@
-CREDIT PAPER — Example AU SME Pty Ltd
+CREDIT PAPER — Base Case AU SME Pty Ltd
 Date: FY0 Assessment
 Analyst: Automated
 ======================================================================
 
 BORROWER OVERVIEW
-Example AU SME Pty Ltd operates in the Manufacturing sector with FY0 revenue of A$22.5M. The business has been assessed under the bank's SME credit framework using 3 periods of financial data (FY-2 audited, FY-1 audited, FY0 management accounts).
+Base Case AU SME Pty Ltd operates in the Manufacturing sector with FY0 revenue of A$22.5M. The business has been assessed under the bank's SME credit framework using 3 periods of financial data (FY-2 audited, FY-1 audited, FY0 management accounts).
 
 FINANCIAL TRENDS
 14 of 14 monitored metrics show positive trends. No negative trends were identified.

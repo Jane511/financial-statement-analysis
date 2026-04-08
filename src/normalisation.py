@@ -4,7 +4,7 @@ Earnings Normalisation (EBITDAO)
 Adjusts reported earnings to reflect true operating performance by removing
 non-recurring items and adjusting for owner salary — the "O" in EBITDAO.
 
-Aligns with Commercial Ready course Steps 1-4:
+Aligns with standard bank credit framework Steps 1-4:
   1. What are the Earnings? (EBIT)
   2. Owner Contribution (salary adjustment)
   3. Other Adjustments (one-off items)
@@ -94,7 +94,7 @@ def total_available_for_servicing(
     """
     Calculate Total Available for Servicing — the surplus after debt commitments.
 
-    This is the "first way out" test from the Commercial Ready course.
+    This is the "first way out" test from the standard bank credit framework.
 
     Parameters
     ----------

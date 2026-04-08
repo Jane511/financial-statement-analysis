@@ -2,7 +2,7 @@
 Three-Period Trend Analysis
 ============================
 Calculates slopes and direction flags across FY-2 → FY-1 → FY0 for key metrics.
-Maps to the Derived_Ratios sheet rows 23-40 (Lecture-required three-period trend review).
+Maps to the Derived_Ratios sheet rows 23-40 for structured multi-period credit review.
 
 Bank credit analysts assess whether key financial metrics are improving, stable, or
 deteriorating. This module produces:
@@ -49,7 +49,7 @@ POSITIVE_COMMENTS = {
     "ebitda": "EBITDA/PBDIT is improving, consistent with stronger operating earnings.",
     "ebitda_margin": "EBITDA margin is expanding.",
     "ebit": "Operating profit is increasing.",
-    "operating_cash_flow": "Operating cash flow is improving, matching the lectures cash-flow test.",
+    "operating_cash_flow": "Operating cash flow is improving, consistent with stronger debt-servicing capacity.",
     "net_worth": "Net worth is increasing, which is supportive of credit quality.",
     "share_capital": "Equity infusion is increasing, indicating greater support from shareholders / owners.",
     "cash": "Cash on hand is increasing, which supports day-to-day liquidity.",
@@ -129,7 +129,7 @@ def analyse_trends(
     borrower_id : int
         Borrower to analyse.
     metrics : list[str], optional
-        Subset of metrics to analyse. Defaults to core lecture-aligned metrics.
+        Subset of metrics to analyse. Defaults to the core credit-monitoring metrics.
 
     Returns
     -------

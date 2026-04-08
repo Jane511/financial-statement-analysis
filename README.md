@@ -32,7 +32,7 @@ This project automates each step using Python, producing the same outputs a cred
 │   ├── normalisation.py                   # EBITDAO adjustments (owner salary, one-offs)
 │   ├── ratio_engine.py                    # 20+ financial ratios
 │   ├── trend_analysis.py                  # 3-period trend slopes and flags
-│   ├── working_capital.py                 # Lecture-aligned WC quality analysis
+│   ├── working_capital.py                 # Bank-aligned WC quality analysis
 │   ├── altman_zscore.py                   # Altman Z-score (SME proxy)
 │   ├── merton_pd.py                       # Merton structural PD model
 │   ├── credit_scorecard.py                # Weighted integrated scorecard
@@ -120,9 +120,9 @@ This project primarily addresses **Capacity** and **Capital** — the quantitati
 
 ---
 
-## Sample Output — Reference Borrower
+## Sample Output — Base Case Borrower
 
-**Example AU SME Pty Ltd** (Manufacturing, Revenue A$22.5M)
+**Base Case AU SME Pty Ltd** (Manufacturing, Revenue A$22.5M)
 
 | Metric | Value | Status |
 |--------|-------|--------|
@@ -159,7 +159,7 @@ cd notebooks
 jupyter notebook
 ```
 
-Run notebooks in order (01 → 06). The reference borrower (borrower_id=0) matches the Excel model for verification.
+Run notebooks in order (01 → 06). The base-case borrower (borrower_id=0) provides a stable benchmark for validation.
 
 ---
 

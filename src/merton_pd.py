@@ -22,7 +22,7 @@ Present Value of Expected Loss (PVEL):
   PVEL = D*exp(-r*T)*PD*N(-E1)/N(-DD) - A*N(-E1)
   Simplified: PVEL = Discounted_Default_Leg - Recovery_Leg
 
-Verification: Reference borrower should produce PD ≈ 5.36%, PVEL ≈ $62,578
+Verification: Base-case borrower should produce PD ≈ 5.36%, PVEL ≈ $62,578
 """
 
 import numpy as np

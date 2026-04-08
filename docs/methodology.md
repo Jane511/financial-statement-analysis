@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document maps each analysis module to its source methodology: the Commercial Ready professional course, the AU SME Borrower Model (Excel), and standard Australian bank credit practice.
+This document maps each analysis module to its source methodology: the AU SME Borrower Model (Excel) and standard Australian bank credit practice.
 
 ---
 
@@ -21,7 +21,7 @@ Consistency enables ratio calculation, peer comparison, and trend analysis acros
 
 ## 2. Earnings Normalisation (`normalisation.py`)
 
-**Source:** Commercial Ready course Steps 1-4.
+**Source:** Standard bank earnings-normalisation practice and the AU SME borrower model.
 
 **EBITDAO build-up:**
 ```
@@ -41,18 +41,18 @@ EBIT (reported Operating Profit)
 
 ## 3. Ratio Engine (`ratio_engine.py`)
 
-**Source:** Derived_Ratios sheet + Commercial Ready "Four Measures of Capacity".
+**Source:** Derived_Ratios sheet and standard bank capacity analysis.
 
 ### Coverage Ratios (The "First Way Out")
 
-| Ratio | Formula | Threshold | Course Reference |
+| Ratio | Formula | Threshold | Reference |
 |-------|---------|-----------|------------------|
-| ICR | EBIT / Interest Expense | >= 2.0x | Commercial Ready: "EBITO / Total Interest = 5.35 times" |
-| DSCR | OCF / (Interest + Scheduled Principal) | >= 1.20x | Commercial Ready: "EBITDAO / Total Repayment Obligations = 2.42" |
+| ICR | EBIT / Interest Expense | >= 2.0x | Capacity coverage benchmark |
+| DSCR | OCF / (Interest + Scheduled Principal) | >= 1.20x | Debt-service benchmark |
 | FCCR | EBITDA / (Interest + Leases + Tax + Principal) | >= 1.20x | Excel model: IC_Decision row 32 |
-| Payback | (Total Debt - Cash) / EBITDA | Context | Commercial Ready: "Total Proposed Debt - Cash / Total EBITDAO" |
+| Payback | (Total Debt - Cash) / EBITDA | Context | bank credit framework: "Total Proposed Debt - Cash / Total EBITDAO" |
 
-### Verification (Reference Borrower FY0)
+### Verification (Base Case Borrower FY0)
 - ICR: 2,700,000 / 600,000 = **4.5x** ✓
 - DSCR: 2,250,000 / (600,000 + 600,000) = **1.875x** ✓
 - Debt/EBITDA: 6,000,000 / 3,150,000 = **1.905x** ✓
@@ -79,7 +79,7 @@ EBIT (reported Operating Profit)
 
 **Source:** Working_Capital_Analysis sheet.
 
-**Lecture flow:**
+**Assessment flow:**
 1. Remove cash from current assets → CA excl cash
 2. Test raw WC gap: CA excl cash - Current Liabilities
 3. Add cash back → Final WC (true short-term liquidity)
@@ -92,7 +92,7 @@ EBIT (reported Operating Profit)
 - AMBER: Final WC positive BUT raw WC negative (cash covers gap)
 - RED: Final WC negative (borrowing needed for short-term liquidity)
 
-**Verification:** Reference borrower: Raw WC excl cash = 5,400,000 - 4,500,000 = 900,000 > 0 → **GREEN** ✓
+**Verification:** Base case borrower: Raw WC excl cash = 5,400,000 - 4,500,000 = 900,000 > 0 → **GREEN** ✓
 
 ---
 

@@ -4,8 +4,8 @@ Synthetic Australian SME Financial Statement Generator
 Generates realistic 3-year financial statements (FY-2 audited, FY-1 audited, FY0 management
 accounts) for Australian SME borrowers across multiple industries.
 
-Includes the Excel model's example borrower ("Example AU SME Pty Ltd") as borrower_id=0
-so that all downstream calculations can be verified against the reference model.
+Includes a base-case borrower ("Base Case AU SME Pty Ltd") as borrower_id=0
+so that downstream calculations can be checked against a stable benchmark.
 
 Fields align with the Company_Inputs sheet of AU_SME_Borrower_Model_Final_v4_updated.xlsx.
 """
@@ -76,11 +76,11 @@ INDUSTRY_PROFILES = {
 }
 
 # ---------------------------------------------------------------------------
-# Reference borrower — matches Excel model exactly for verification
+# Base-case borrower used for benchmark validation
 # ---------------------------------------------------------------------------
 REFERENCE_BORROWER = {
     "borrower_id": 0,
-    "borrower_name": "Example AU SME Pty Ltd",
+    "borrower_name": "Base Case AU SME Pty Ltd",
     "anzsic_division": "Manufacturing",
     "periods": ["FY-2", "FY-1", "FY0"],
     "revenue": [18_000_000, 20_000_000, 22_500_000],
@@ -253,7 +253,7 @@ def _generate_single_borrower(borrower_id: int, rng: np.random.Generator) -> lis
 
 
 def _reference_borrower_rows() -> list[dict]:
-    """Return the Excel model's reference borrower as 3 rows."""
+    """Return the benchmark borrower as 3 rows."""
     ref = REFERENCE_BORROWER
     rows = []
     for j, period in enumerate(ref["periods"]):
@@ -282,7 +282,7 @@ def generate_sme_dataset(n_borrowers: int = 80, seed: int = 42) -> pd.DataFrame:
     Parameters
     ----------
     n_borrowers : int
-        Number of synthetic borrowers to generate (in addition to the reference borrower).
+        Number of synthetic borrowers to generate (in addition to the benchmark borrower).
     seed : int
         Random seed for reproducibility.
 

@@ -8,7 +8,7 @@ Debt / EBITDA,debt_to_ebitda,0.47850534457470206,NEGATIVE,"Debt / EBITDA is incr
 Debt / Cash Flow,debt_to_cashflow,0.5842313627406278,NEGATIVE,"Debt / Cash Flow is increasing, which may stress repayment capacity.",0,,2.923746373808537,3.507977736549165
 Interest Coverage (EBIT / Interest),icr,-1.210918420643996,NEGATIVE,Interest coverage is declining.,0,,5.359611231101512,4.148692810457517
 Current Ratio,current_ratio,-0.08998112197950128,NEGATIVE,Current Ratio trend is negative.,0,,1.1293527172031845,1.0393715952236835
-Operating Cash Flow,operating_cash_flow,56399999.9999999,POSITIVE,"Operating cash flow is improving, matching the lectures cash-flow test.",1,,482600000.0,539000000.0
+Operating Cash Flow,operating_cash_flow,56399999.9999999,POSITIVE,"Operating cash flow is improving, consistent with stronger debt-servicing capacity.",1,,482600000.0,539000000.0
 Liquidity (Cash in Hand),cash,-12500000.00000001,NEGATIVE,Liquidity (Cash in Hand) trend is negative.,0,,97300000.0,84800000.0
 Net Worth / Total Equity,net_worth,109299999.9999997,POSITIVE,"Net worth is increasing, which is supportive of credit quality.",1,,1516600000.0,1625900000.0
 Equity Infusion / Share Capital,share_capital,24599999.999999747,POSITIVE,"Equity infusion is increasing, indicating greater support from shareholders / owners.",1,,1238800000.0,1263400000.0

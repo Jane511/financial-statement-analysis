@@ -4,7 +4,7 @@ Risk-Based Pricing Engine
 Calculates indicative all-in lending rate based on PD, expected loss,
 and borrower risk profile. Maps to the Risk_Based_Pricing sheet.
 
-Pricing structure (aligns with Commercial Ready course — Interest Rate Components):
+Pricing structure (aligns with standard bank credit framework — Interest Rate Components):
   1. Base rate (risk-free rate / BBSY proxy)
   2. Funding spread (bank's cost of wholesale funding above risk-free)
   3. Operating / servicing spread (admin costs)

@@ -1,10 +1,10 @@
 """
 Working Capital Quality Analysis
 =================================
-Implements the lecture-aligned working capital assessment from the
+Implements the bank-aligned working capital assessment from the
 Working_Capital_Analysis sheet of the AU SME Borrower Model.
 
-Lecture flow:
+Assessment flow:
   1. Remove cash from current assets
   2. Test the raw WC gap (CA excl cash - CL)
   3. Add cash back → final WC
@@ -21,7 +21,7 @@ import numpy as np
 
 def analyse_working_capital(row: pd.Series) -> dict:
     """
-    Perform lecture-aligned working capital analysis for a single borrower-period.
+    Perform bank-aligned working capital analysis for a single borrower-period.
 
     Parameters
     ----------
@@ -55,7 +55,7 @@ def analyse_working_capital(row: pd.Series) -> dict:
 
     # Step 4: Borrowing required to make WC positive
     borrowing_required = max(-raw_wc_excl_cash, 0)
-    lecture_borrowing_indicator = -raw_wc_excl_cash  # negative = no borrowing needed
+    borrowing_indicator = -raw_wc_excl_cash  # negative = no borrowing needed
 
     # Step 5: Cash coverage of raw WC gap
     if raw_wc_excl_cash < 0:
@@ -96,7 +96,7 @@ def analyse_working_capital(row: pd.Series) -> dict:
         "raw_wc_excl_cash": raw_wc_excl_cash,
         "final_wc_incl_cash": final_wc,
         "borrowing_required": borrowing_required,
-        "lecture_borrowing_indicator": lecture_borrowing_indicator,
+        "borrowing_indicator": borrowing_indicator,
         "cash_coverage_of_gap": cash_coverage,
         "cash_share_of_ca": cash_share,
         "debtor_share_of_ca": debtor_share,

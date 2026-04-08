@@ -5,7 +5,7 @@ Converts raw borrower financial data into a standardised side-by-side template
 (FY-2, FY-1, FY0) — the first step in any bank credit analysis.
 
 Maps to the Company_Inputs sheet of the AU SME Borrower Model.
-Aligns with Commercial Ready course: "Find the Revenue → Understand Gross Margin →
+Aligns with standard bank credit framework: "Find the Revenue → Understand Gross Margin →
 Normalise Earnings → Total Available for Servicing".
 """
 

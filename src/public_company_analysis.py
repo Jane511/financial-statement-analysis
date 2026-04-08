@@ -42,6 +42,7 @@ INPUT_PATH = BASE_DIR / "data" / "public_listed_company_financials.csv"
 SOURCE_PATH = BASE_DIR / "data" / "public_listed_company_sources.csv"
 TABLE_DIR = BASE_DIR / "outputs" / "tables" / "public_company_analysis"
 REPORT_DIR = BASE_DIR / "outputs" / "reports" / "public_company_analysis"
+PDF_DIR = BASE_DIR / "Reports"
 ROOT_PDF_DIR = BASE_DIR
 MPL_CONFIG_DIR = BASE_DIR / "outputs" / ".mplconfig"
 
@@ -152,6 +153,7 @@ def ensure_output_dirs() -> None:
     """Create output folders if they do not already exist."""
     TABLE_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    PDF_DIR.mkdir(parents=True, exist_ok=True)
     MPL_CONFIG_DIR.mkdir(parents=True, exist_ok=True)
     for lock_file in MPL_CONFIG_DIR.glob("*.matplotlib-lock"):
         try:
@@ -224,7 +226,7 @@ def build_plain_english_ratio_bullets(
     zscore_detail: dict,
     merton: dict,
 ) -> list[str]:
-    """Explain the key ratios in plain English for a non-technical audience."""
+    """Explain the key ratios in a portfolio-ready credit style."""
     dscr_strength = metric_strength(
         float(fy0["dscr"]),
         BANK_THRESHOLDS["dscr"]["threshold"],
@@ -363,11 +365,11 @@ def build_plain_english_ratio_section(
     zscore_detail: dict,
     merton: dict,
 ) -> str:
-    """Render the HR-friendly ratio interpretation section."""
+    """Render the portfolio-oriented ratio interpretation section."""
     intro = (
-        "For a non-technical reader, a lender is mainly asking three questions: can normal cash flow pay debt, "
-        "is total debt sensible for the size of earnings, and can the company meet short-term obligations without "
-        "scrambling for cash?"
+        "From a credit perspective, the lender is mainly asking three questions: can recurring cash flow service "
+        "debt, is total leverage appropriate for the earnings base, and can the company meet short-term obligations "
+        "without liquidity stress?"
     )
     bullets = "\n".join(
         f"- {line}"
@@ -449,11 +451,11 @@ def build_pdf_blocks(
         ("bullet", f"Debt / EBITDA: {fmt_multiple(fy0['debt_to_ebitda'])}"),
         ("bullet", f"Current Ratio: {fmt_multiple(fy0['current_ratio'])}"),
         ("bullet", f"Indicative all-in pricing: {fmt_pct(pricing['all_in_rate'])}"),
-        ("heading", "How HR Should Read The Ratios"),
+        ("heading", "Credit Interpretation of Key Ratios"),
         (
             "body",
-            "For a non-technical reader, a lender is mostly checking repayment capacity, debt load and short-term "
-            "liquidity. The notes below translate the headline ratios into plain-English credit meaning.",
+            "The lender is primarily assessing repayment capacity, leverage, and short-term liquidity. The notes "
+            "below translate the headline ratios into direct credit implications.",
         ),
     ]
     blocks.extend(
@@ -583,7 +585,7 @@ def render_credit_report(
         f"{build_snapshot_table(company_df)}\n\n"
         f"## FY0 Credit Metrics\n"
         f"{build_metric_table(company_df)}\n\n"
-        f"## How HR Should Read The Ratios\n"
+        f"## Credit Interpretation of Key Ratios\n"
         f"{build_plain_english_ratio_section(fy0, scorecard, wc_detail, zscore_detail, merton)}\n\n"
         f"## Key Credit Observations\n"
         f"Earnings and cash generation remain the primary repayment source. {zscore_trend} {pricing['comment']}\n\n"
@@ -684,7 +686,7 @@ def write_company_outputs(
                 merton=merton,
                 trends=trends,
             ),
-            ROOT_PDF_DIR / f"{slug}_credit_report.pdf",
+            PDF_DIR / f"{slug}_credit_report.pdf",
         )
 
         summary_rows.append({

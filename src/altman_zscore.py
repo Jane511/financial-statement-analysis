@@ -19,7 +19,7 @@ Zones:
   1.8 <= Z <= 2.99 → GREY ZONE (moderate risk)
   Z < 1.8 → DISTRESS (high default probability)
 
-Verification: Reference borrower FY0 should produce Z = 2.885
+Verification: Base-case borrower FY0 should produce Z = 2.885
 """
 
 import pandas as pd
