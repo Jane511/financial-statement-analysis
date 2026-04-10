@@ -1,0 +1,13 @@
+check_name,status,detail
+required_output::standardised_borrower_financials.csv,True,present and non-empty
+required_output::ratio_summary_tables.csv,True,present and non-empty
+required_output::working_capital_metrics.csv,True,present and non-empty
+required_output::trend_diagnostics.csv,True,present and non-empty
+required_output::qualitative_risk_flags.csv,True,present and non-empty
+non_negative::standardised_borrower_financials.csv::margin,True,all values non-negative
+non_negative::ratio_summary_tables.csv::working_capital_ratio,True,all values non-negative
+non_negative::ratio_summary_tables.csv::quick_ratio,True,all values non-negative
+non_negative::ratio_summary_tables.csv::collateral_coverage,True,all values non-negative
+non_negative::ratio_summary_tables.csv::utilisation,True,all values non-negative
+non_negative::trend_diagnostics.csv::avg_margin,True,all values non-negative
+non_negative::qualitative_risk_flags.csv::quick_ratio,True,all values non-negative

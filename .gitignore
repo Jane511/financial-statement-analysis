@@ -8,8 +8,14 @@ __pycache__/
 
 # Raw source financial statements
 data/financials/
+data/raw/
+data/source/
+data/interim/
 
 # Ignore generated presentation outputs and local runtime cache
 outputs/.mplconfig/
 outputs/figures/
 outputs/reports/
+
+# Keep tabular outputs tracked (used by downstream modules)
+!outputs/tables/

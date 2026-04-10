@@ -1,0 +1,7 @@
+borrower_id,facility_id,receivables_days,inventory_days,payables_days,cash_conversion_cycle
+B001,F001,39.3,44.3,39.1,44.5
+B002,F002,42.4,18.2,73.3,-12.7
+B003,F003,17.4,6.4,26.5,-2.7
+B004,F004,34.5,58.5,43.6,49.4
+B005,F005,20.3,67.4,49.8,37.9
+B006,F006,33.3,2.5,21.5,14.3

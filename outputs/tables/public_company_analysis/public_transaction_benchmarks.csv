@@ -1,0 +1,6 @@
+industry,transaction_account_count,transaction_record_count,tx_avg_monthly_credits_median,tx_avg_monthly_debits_median,tx_credit_turnover_cv_median,tx_months_negative_net_cash_median,tx_failed_event_rate_median,tx_cash_advance_rate_median,transaction_benchmark_source
+Construction - Trade Services,1,12,180214250.0,173461000.0,0.23374009362354894,3.0,0.0020168250132851554,0.007021238609044512,Financial Statement Analysis public company proxy conduct benchmarks
+Health Care and Social Assistance,1,12,803787333.3333334,695721500.0,0.14500192577180349,2.0,0.006361022297697695,0.005,Financial Statement Analysis public company proxy conduct benchmarks
+Retail Trade,1,12,799366666.6666666,736650000.0,0.05575768800516378,1.0,0.003205887243980466,0.005,Financial Statement Analysis public company proxy conduct benchmarks
+"Transport, Postal and Warehousing",1,12,277616666.6666667,240725000.0,0.23564172395469948,5.0,0.027075155128199337,0.005,Financial Statement Analysis public company proxy conduct benchmarks
+Wholesale Trade,1,12,1443583333.3333333,1398666666.6666667,0.11543559379595014,2.0,0.010325149477249473,0.013927089746476013,Financial Statement Analysis public company proxy conduct benchmarks

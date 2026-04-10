@@ -21,6 +21,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+import numpy as np
 import pandas as pd
 
 from .altman_zscore import borrower_zscore_trend
@@ -45,6 +46,14 @@ REPORT_DIR = BASE_DIR / "outputs" / "reports" / "public_company_analysis"
 PDF_DIR = BASE_DIR / "Reports"
 ROOT_PDF_DIR = BASE_DIR
 MPL_CONFIG_DIR = BASE_DIR / "outputs" / ".mplconfig"
+
+_CASHFLOW_LENDING_INDUSTRY_MAP = {
+    "Construction": "Construction - Trade Services",
+    "Health Care": "Health Care and Social Assistance",
+    "Retail Trade": "Retail Trade",
+    "Transport & Logistics": "Transport, Postal and Warehousing",
+    "Wholesale Trade": "Wholesale Trade",
+}
 
 
 def slugify(value: str) -> str:
@@ -160,6 +169,235 @@ def ensure_output_dirs() -> None:
             lock_file.unlink()
         except PermissionError:
             pass
+
+
+def build_cashflow_lending_public_benchmark_exports(
+    df_with_ratios: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Export listed-company data in the schema expected by the PD scorecard repo."""
+    export_df = df_with_ratios.copy()
+    export_df["industry"] = export_df["anzsic_division"].map(_CASHFLOW_LENDING_INDUSTRY_MAP)
+    export_df["source_file"] = export_df["borrower_name"].map(slugify) + "_public_company_analysis.csv"
+
+    standard_df = (
+        export_df[
+            [
+                "source_file",
+                "borrower_name",
+                "industry",
+                "period",
+                "revenue",
+                "ebitda",
+                "ebit",
+                "operating_cash_flow",
+                "current_assets",
+                "current_liabilities",
+                "total_debt",
+                "interest_expense",
+                "cash",
+                "debtors",
+                "inventory",
+                "net_worth",
+            ]
+        ]
+        .rename(columns={"borrower_name": "company_name"})
+        .dropna(subset=["industry", "revenue"])
+        .sort_values(["industry", "company_name", "period"])
+        .reset_index(drop=True)
+    )
+
+    benchmark_df = (
+        export_df.dropna(subset=["industry", "revenue"])
+        .groupby("industry", as_index=False)
+        .agg(
+            listed_company_count=("borrower_name", "nunique"),
+            listed_revenue_median=("revenue", "median"),
+            listed_ebitda_margin_median=("ebitda_margin", "median"),
+            listed_ocf_margin_median=("ocf_margin", "median"),
+            listed_current_ratio_median=("current_ratio", "median"),
+            listed_debt_to_ebitda_median=("debt_to_ebitda", "median"),
+        )
+        .sort_values("industry")
+        .reset_index(drop=True)
+    )
+    benchmark_df["listed_benchmark_source"] = "Financial Statement Analysis public company outputs"
+    return standard_df, benchmark_df
+
+
+def build_cashflow_lending_transaction_benchmarks(
+    df_with_ratios: pd.DataFrame,
+    summary_df: pd.DataFrame,
+) -> pd.DataFrame:
+    """Build conduct benchmark proxies for the downstream PD project."""
+    latest_df = df_with_ratios[df_with_ratios["period"] == "FY0"].copy()
+    previous_df = (
+        df_with_ratios[df_with_ratios["period"] == "FY-1"][["borrower_name", "revenue", "ocf_margin"]]
+        .rename(columns={"revenue": "revenue_fy_minus_1", "ocf_margin": "ocf_margin_fy_minus_1"})
+    )
+    latest_df = latest_df.merge(previous_df, on="borrower_name", how="left")
+    latest_df = latest_df.merge(
+        summary_df[["borrower_name", "merton_pd_fy0"]],
+        on="borrower_name",
+        how="left",
+    )
+    latest_df["industry"] = latest_df["anzsic_division"].map(_CASHFLOW_LENDING_INDUSTRY_MAP)
+    latest_df = latest_df.dropna(subset=["industry"]).copy()
+
+    revenue_growth = (
+        latest_df["revenue"] / latest_df["revenue_fy_minus_1"].replace(0, pd.NA) - 1.0
+    ).fillna(0.0)
+    ocf_margin_delta = (latest_df["ocf_margin"] - latest_df["ocf_margin_fy_minus_1"]).fillna(0.0).abs()
+    merton_pd = latest_df["merton_pd_fy0"].fillna(0.0)
+
+    latest_df["tx_avg_monthly_credits"] = latest_df["revenue"] / 12.0
+    latest_df["tx_avg_monthly_debits"] = (latest_df["revenue"] - latest_df["operating_cash_flow"]).clip(lower=0.0) / 12.0
+    latest_df["tx_credit_turnover_cv"] = np.clip(
+        0.04 + revenue_growth.abs() * 0.75 + ocf_margin_delta * 2.5 + merton_pd * 1.5,
+        0.03,
+        0.30,
+    )
+    latest_df["tx_months_negative_net_cash"] = np.clip(
+        np.round(
+            0.5
+            + np.maximum(0.03 - latest_df["ocf_margin"].fillna(0.0), 0.0) * 80
+            + latest_df["tx_credit_turnover_cv"] * 12
+            + merton_pd * 30
+        ),
+        0,
+        8,
+    )
+    latest_df["tx_failed_event_rate"] = np.clip(
+        0.002
+        + np.maximum(1.15 - latest_df["current_ratio"].fillna(1.15), 0.0) * 0.05
+        + np.maximum(1.25 - latest_df["dscr"].fillna(1.25), 0.0) * 0.04
+        + merton_pd * 0.60,
+        0.0,
+        0.20,
+    )
+    latest_df["tx_cash_advance_rate"] = np.clip(
+        0.005
+        + np.maximum(0.04 - latest_df["ocf_margin"].fillna(0.04), 0.0) * 0.80
+        + np.maximum(1.10 - latest_df["current_ratio"].fillna(1.10), 0.0) * 0.03,
+        0.0,
+        0.15,
+    )
+
+    benchmark_df = (
+        latest_df.groupby("industry", as_index=False)
+        .agg(
+            transaction_account_count=("borrower_name", "nunique"),
+            tx_avg_monthly_credits_median=("tx_avg_monthly_credits", "median"),
+            tx_avg_monthly_debits_median=("tx_avg_monthly_debits", "median"),
+            tx_credit_turnover_cv_median=("tx_credit_turnover_cv", "median"),
+            tx_months_negative_net_cash_median=("tx_months_negative_net_cash", "median"),
+            tx_failed_event_rate_median=("tx_failed_event_rate", "median"),
+            tx_cash_advance_rate_median=("tx_cash_advance_rate", "median"),
+        )
+        .sort_values("industry")
+        .reset_index(drop=True)
+    )
+    benchmark_df["transaction_record_count"] = benchmark_df["transaction_account_count"] * 12
+    benchmark_df["transaction_benchmark_source"] = "Financial Statement Analysis public company proxy conduct benchmarks"
+    return benchmark_df[
+        [
+            "industry",
+            "transaction_account_count",
+            "transaction_record_count",
+            "tx_avg_monthly_credits_median",
+            "tx_avg_monthly_debits_median",
+            "tx_credit_turnover_cv_median",
+            "tx_months_negative_net_cash_median",
+            "tx_failed_event_rate_median",
+            "tx_cash_advance_rate_median",
+            "transaction_benchmark_source",
+        ]
+    ]
+
+
+def build_cashflow_lending_invoice_benchmarks(
+    df_with_ratios: pd.DataFrame,
+    summary_df: pd.DataFrame,
+) -> pd.DataFrame:
+    """Build receivables benchmark proxies for the downstream PD project."""
+    latest_df = df_with_ratios[df_with_ratios["period"] == "FY0"].copy()
+    latest_df = latest_df.merge(
+        summary_df[["borrower_name", "merton_pd_fy0"]],
+        on="borrower_name",
+        how="left",
+    )
+    latest_df["industry"] = latest_df["anzsic_division"].map(_CASHFLOW_LENDING_INDUSTRY_MAP)
+    latest_df = latest_df.dropna(subset=["industry"]).copy()
+
+    debtor_days = latest_df["debtor_days"].fillna(30.0)
+    ocf_margin = latest_df["ocf_margin"].fillna(0.05)
+    current_ratio = latest_df["current_ratio"].fillna(1.10)
+    inventory_days = latest_df["inventory_days"].fillna(0.0)
+    merton_pd = latest_df["merton_pd_fy0"].fillna(0.0)
+
+    latest_df["invoice_top_customer_concentration_pct"] = np.clip(
+        0.12 + np.minimum(debtor_days / 365.0, 0.30) * 0.60 + np.maximum(0.03 - ocf_margin, 0.0) * 1.20 + merton_pd * 0.80,
+        0.10,
+        0.75,
+    )
+    latest_df["invoice_customer_count"] = np.clip(
+        np.round(6.0 / latest_df["invoice_top_customer_concentration_pct"]),
+        3,
+        80,
+    )
+    latest_df["invoice_amount_median"] = (
+        latest_df["revenue"] / 12.0 / latest_df["invoice_customer_count"].replace(0, pd.NA) * 0.80
+    ).fillna(0.0)
+    latest_df["invoice_payment_delay_median_days"] = np.clip(debtor_days - 30.0, 0.0, 75.0)
+    latest_df["invoice_late_payment_rate"] = np.clip(
+        0.08
+        + latest_df["invoice_payment_delay_median_days"] / 180.0
+        + np.maximum(1.10 - current_ratio, 0.0) * 0.10
+        + merton_pd * 0.80,
+        0.02,
+        0.65,
+    )
+    latest_df["invoice_severe_late_rate_90dpd"] = np.clip(
+        0.01 + np.maximum(latest_df["invoice_payment_delay_median_days"] - 45.0, 0.0) / 300.0 + merton_pd * 0.20,
+        0.0,
+        0.25,
+    )
+    latest_df["invoice_dilution_proxy_rate"] = np.clip(
+        0.01 + inventory_days / 365.0 * 0.08 + np.maximum(0.04 - ocf_margin, 0.0) * 0.60,
+        0.0,
+        0.20,
+    )
+    latest_df["invoice_record_count"] = np.clip(np.round(latest_df["invoice_customer_count"] * 12), 24, 960)
+
+    benchmark_df = (
+        latest_df.groupby("industry", as_index=False)
+        .agg(
+            invoice_record_count=("invoice_record_count", "median"),
+            invoice_customer_count=("invoice_customer_count", "median"),
+            invoice_amount_median=("invoice_amount_median", "median"),
+            invoice_payment_delay_median_days=("invoice_payment_delay_median_days", "median"),
+            invoice_late_payment_rate=("invoice_late_payment_rate", "median"),
+            invoice_severe_late_rate_90dpd=("invoice_severe_late_rate_90dpd", "median"),
+            invoice_top_customer_concentration_pct=("invoice_top_customer_concentration_pct", "median"),
+            invoice_dilution_proxy_rate=("invoice_dilution_proxy_rate", "median"),
+        )
+        .sort_values("industry")
+        .reset_index(drop=True)
+    )
+    benchmark_df["invoice_benchmark_source"] = "Financial Statement Analysis public company proxy receivables benchmarks"
+    return benchmark_df[
+        [
+            "industry",
+            "invoice_record_count",
+            "invoice_customer_count",
+            "invoice_amount_median",
+            "invoice_payment_delay_median_days",
+            "invoice_late_payment_rate",
+            "invoice_severe_late_rate_90dpd",
+            "invoice_top_customer_concentration_pct",
+            "invoice_dilution_proxy_rate",
+            "invoice_benchmark_source",
+        ]
+    ]
 
 
 def build_executive_summary(
@@ -770,12 +1008,19 @@ def main() -> None:
     df = pd.read_csv(INPUT_PATH)
     source_df = pd.read_csv(SOURCE_PATH)
     df_with_ratios = calculate_ratios(df)
+    listed_standard_df, listed_benchmark_df = build_cashflow_lending_public_benchmark_exports(df_with_ratios)
 
     # Persist the curated input set alongside the outputs for downstream reuse.
     df_with_ratios.to_csv(TABLE_DIR / "public_listed_company_financials_with_ratios.csv", index=False)
+    listed_standard_df.to_csv(TABLE_DIR / "public_listed_company_financials_standardized.csv", index=False)
+    listed_benchmark_df.to_csv(TABLE_DIR / "public_listed_company_benchmarks.csv", index=False)
     source_df.to_csv(TABLE_DIR / "public_listed_company_sources.csv", index=False)
 
     summary_df = write_company_outputs(df, df_with_ratios, source_df)
+    transaction_benchmark_df = build_cashflow_lending_transaction_benchmarks(df_with_ratios, summary_df)
+    invoice_benchmark_df = build_cashflow_lending_invoice_benchmarks(df_with_ratios, summary_df)
+    transaction_benchmark_df.to_csv(TABLE_DIR / "public_transaction_benchmarks.csv", index=False)
+    invoice_benchmark_df.to_csv(TABLE_DIR / "public_invoice_benchmarks.csv", index=False)
     write_portfolio_report(summary_df)
 
 

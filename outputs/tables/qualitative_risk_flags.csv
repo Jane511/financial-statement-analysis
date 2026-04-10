@@ -1,0 +1,7 @@
+borrower_id,facility_id,segment,industry,dscr,leverage,quick_ratio,qualitative_risk_flag
+B001,F001,SME Cash Flow,Wholesale Trade,1.7222,2.3387,1.3478,no_major_flag
+B002,F002,SME Cash Flow,Construction,1.0508,3.2903,1.1316,low_dscr
+B003,F003,Property Backed,Accommodation and Food Services,1.4074,3.4211,1.6429,no_major_flag
+B004,F004,Working Capital,Manufacturing,1.8723,1.9886,1.0746,no_major_flag
+B005,F005,Trade Finance,Retail Trade,1.6957,1.8462,0.8406,weak_liquidity
+B006,F006,Contingent,Professional Services,4.9524,0.4135,2.4595,no_major_flag

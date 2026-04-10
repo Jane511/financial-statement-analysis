@@ -1,0 +1,6 @@
+industry,listed_company_count,listed_revenue_median,listed_ebitda_margin_median,listed_ocf_margin_median,listed_current_ratio_median,listed_debt_to_ebitda_median,listed_benchmark_source
+Construction - Trade Services,1,2089243000.0,0.07168382236801826,0.0653006931001084,1.612224004455041,0.5928661595248341,Financial Statement Analysis public company outputs
+Health Care and Social Assistance,1,9306426500.0,0.18306589488902147,0.12696772168273843,1.0925866414706826,2.8407543064076384,Financial Statement Analysis public company outputs
+Retail Trade,1,9609400000.0,0.09768108416517574,0.07643914496383433,1.195560265344822,0.7014990240772843,Financial Statement Analysis public company outputs
+"Transport, Postal and Warehousing",1,3097000000.0,0.19281210349959382,0.1349127610341812,1.0569091654766893,3.6653785454079384,Financial Statement Analysis public company outputs
+Wholesale Trade,1,16617700000.0,0.043211808377995306,0.03072162590036131,1.084362156213434,2.289230879464454,Financial Statement Analysis public company outputs

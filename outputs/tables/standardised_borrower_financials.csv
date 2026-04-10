@@ -1,0 +1,7 @@
+borrower_id,facility_id,segment,industry,revenue,ebitda,margin,net_debt,debt_service,dscr
+B001,F001,SME Cash Flow,Wholesale Trade,5200000,620000,0.1192,1450000,360000,1.7222
+B002,F002,SME Cash Flow,Construction,3700000,310000,0.0838,1020000,295000,1.0508
+B003,F003,Property Backed,Accommodation and Food Services,6100000,760000,0.1246,2600000,540000,1.4074
+B004,F004,Working Capital,Manufacturing,7300000,880000,0.1205,1750000,470000,1.8723
+B005,F005,Trade Finance,Retail Trade,4500000,390000,0.0867,720000,230000,1.6957
+B006,F006,Contingent,Professional Services,6800000,1040000,0.1529,430000,210000,4.9524

@@ -1,0 +1,7 @@
+segment,industry,avg_dscr,avg_margin,avg_leverage,facilities,trend_risk
+Contingent,Professional Services,4.9524,0.1529,0.4135,1,stable
+Property Backed,Accommodation and Food Services,1.4074,0.1246,3.4211,1,stable
+SME Cash Flow,Construction,1.0508,0.0838,3.2903,1,elevated
+SME Cash Flow,Wholesale Trade,1.7222,0.1192,2.3387,1,stable
+Trade Finance,Retail Trade,1.6957,0.0867,1.8462,1,stable
+Working Capital,Manufacturing,1.8723,0.1205,1.9886,1,stable
