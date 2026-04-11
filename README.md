@@ -1,10 +1,12 @@
-# financial-statement-analysis
+# Borrower Financial Statement Analysis Project
+
+This repository is the borrower financial analysis layer at the front of the commercial credit-risk stack. It uses synthetic borrower statements and public benchmark-style reference data to produce standardised financials, ratio summaries, working-capital metrics, and qualitative risk flags. The outputs feed borrower scoring, LGD interpretation, pricing analysis, and monitoring workflows.
 
 ## What this repo is
 
-This repo is the upstream commercial borrower financial-analysis engine for a bank-style Australian credit-risk portfolio demonstration. It uses public-data friendly and synthetic sample data only.
+This project demonstrates how borrower financial information can be turned into reusable commercial credit-analysis outputs. It is designed for recruiter and employer review, so the repo emphasises clear structure, explainable metrics, and portfolio-style documentation rather than raw modelling complexity.
 
-## Where it sits in the full credit-risk stack
+## Where it sits in the stack
 
 Upstream inputs:
 - synthetic borrower financial statements
@@ -14,17 +16,11 @@ Downstream consumers:
 - `PD-and-scorecard-commercial`
 - `LGD-commercial`
 - `RAROC-pricing-and-return-hurdle`
-- `Portfolio-Monitoring-MIS`
+- `portfolio-monitor-commercial` (planned downstream repo; not yet published on the public portfolio)
 
-## Inputs
+Some downstream modules are planned but not yet published on the public portfolio.
 
-The demo pipeline uses `data/raw/demo_portfolio.csv`, generated automatically when missing. The fields cover borrower IDs, facility IDs, segment, industry, product type, limit, drawn balance, collateral, PD, LGD, EAD, and borrower financial metrics.
-
-## What the pipeline does
-
-It loads demo data, builds reusable credit features, runs the `financial` engine, validates the outputs, and writes downstream-friendly CSV files.
-
-## Outputs
+## Key outputs
 
 - `outputs/tables/standardised_borrower_financials.csv`
 - `outputs/tables/ratio_summary_tables.csv`
@@ -32,6 +28,17 @@ It loads demo data, builds reusable credit features, runs the `financial` engine
 - `outputs/tables/trend_diagnostics.csv`
 - `outputs/tables/qualitative_risk_flags.csv`
 - `outputs/tables/pipeline_validation_report.csv`
+
+## Repo structure
+
+- `data/`: raw, interim, processed, and external borrower-analysis inputs
+- `Reports/`: retained PDF credit reports for reviewer-facing examples from the public-company analysis workflow
+- `src/`: reusable financial spreading, ratio, and pipeline modules
+- `scripts/`: wrapper scripts for pipeline execution
+- `docs/`: methodology, assumptions, data dictionary, and validation notes
+- `notebooks/`: walkthrough notebooks for reviewer context
+- `outputs/`: exported tables, reports, and sample artifacts
+- `tests/`: validation and regression checks
 
 ## How to run
 
@@ -45,12 +52,8 @@ Or:
 python scripts/run_codex_pipeline.py
 ```
 
-## Limitations and synthetic-data note
+## Limitations / Demo-Only Note
 
-- Demo data is synthetic and not confidential bank data.
-- Thresholds, overlays, and formulae are transparent portfolio-demonstration assumptions.
-- Production use would require governed source data, calibration, model validation, and approval.
-
-## How it connects to the next repo
-
-The exported CSV files are intentionally flat and can be copied to the next repository's `data/external` or replaced with validated production extracts.
+- All borrower records are synthetic and are included for demonstration only.
+- Benchmarking and qualitative flags use simplified portfolio assumptions rather than internal bank financial spreading rules.
+- The repo is intended to show reusable analytical workflow and reporting quality, not to represent a production credit spreading platform.
