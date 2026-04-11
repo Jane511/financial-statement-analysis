@@ -1,4 +1,4 @@
-# Data Dictionary - Financial-Statement-Analysis
+# Data Dictionary - financial-statement-analysis
 
 | Field | Description |
 | --- | --- |

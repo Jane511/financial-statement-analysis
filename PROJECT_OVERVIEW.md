@@ -1,10 +1,10 @@
-# Project Overview - Financial-Statement-Analysis
+# Project Overview - financial-statement-analysis
 
 This folder has been rebuilt around a clean README, docs, notebooks, modular Python pipeline, sample outputs, and validation checks.
 
 ## Portfolio role
 
-Financial-Statement-Analysis is the upstream commercial borrower financial-analysis engine.
+`financial-statement-analysis` is the upstream commercial borrower financial-analysis engine.
 
 ## Rebuilt deliverables
 

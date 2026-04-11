@@ -1,4 +1,4 @@
-# Financial-Statement-Analysis
+# financial-statement-analysis
 
 ## What this repo is
 
@@ -11,10 +11,10 @@ Upstream inputs:
 - public listed-company style benchmark extracts
 
 Downstream consumers:
-- PD-and-Scorecard-Cashflow-Lending
-- LGD-Cashflow-and-Property-Lending
-- Risk-Based-Pricing-Credit
-- Portfolio-Monitoring-MIS
+- `PD-and-scorecard-commercial`
+- `LGD-commercial`
+- `RAROC-pricing-and-return-hurdle`
+- `Portfolio-Monitoring-MIS`
 
 ## Inputs
 

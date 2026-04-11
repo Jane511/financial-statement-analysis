@@ -1,4 +1,4 @@
-# Methodology - Financial-Statement-Analysis
+# Methodology - financial-statement-analysis
 
 1. Load or generate synthetic demo data.
 2. Standardise borrower, facility, exposure, collateral, and financial fields.

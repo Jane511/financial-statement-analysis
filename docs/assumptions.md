@@ -1,4 +1,4 @@
-# Assumptions - Financial-Statement-Analysis
+# Assumptions - financial-statement-analysis
 
 - Uses synthetic sample records only.
 - Does not rely on hidden internal data, sibling paths, or local Windows paths.
