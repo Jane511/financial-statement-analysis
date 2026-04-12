@@ -1,6 +1,6 @@
-# Borrower Financial Statement Analysis Project
+# Commercial Borrower Financial Statement Analysis Project
 
-This repository is the borrower financial analysis layer at the front of the commercial credit-risk stack. It uses synthetic borrower statements and public benchmark-style reference data to produce standardised financials, ratio summaries, working-capital metrics, and qualitative risk flags. The outputs feed borrower scoring, LGD interpretation, pricing analysis, and monitoring workflows.
+This repository is the borrower financial analysis layer at the front of the public commercial credit-risk stack. It uses synthetic borrower statements and benchmark-style reference data to produce standardised financials, ratio summaries, working-capital metrics, and qualitative risk flags for downstream scoring, loss, pricing, and monitoring workflows.
 
 ## What this repo is
 
@@ -8,17 +8,13 @@ This project demonstrates how borrower financial information can be turned into 
 
 ## Where it sits in the stack
 
-Upstream inputs:
+This repo sits at the front of the public commercial stack and feeds downstream borrower scoring, LGD interpretation, pricing analysis, and portfolio monitoring.
+
+## Key inputs
+
 - synthetic borrower financial statements
 - public listed-company style benchmark extracts
-
-Downstream consumers:
-- `PD-and-scorecard-commercial`
-- `LGD-commercial`
-- `RAROC-pricing-and-return-hurdle`
-- `portfolio-monitor-commercial` (planned downstream repo; not yet published on the public portfolio)
-
-Some downstream modules are planned but not yet published on the public portfolio.
+- financial spreading, ratio, and qualitative assessment assumptions staged under `data/`
 
 ## Key outputs
 
