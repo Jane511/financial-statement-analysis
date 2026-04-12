@@ -1,4 +1,4 @@
-# Project Overview - financial-statement-analysis
+# Project Overview
 
 `financial-statement-analysis` is the front-of-stack borrower financial analysis repo in the public commercial credit-risk portfolio.
 
