@@ -63,13 +63,13 @@ Compatibility note:
 ## How to run
 
 ```powershell
-python -m src.codex_run_pipeline
+python -m src.run_pipeline
 ```
 
 Or:
 
 ```powershell
-python scripts/run_codex_pipeline.py
+python scripts/run_demo_pipeline.py
 ```
 
 ## Limitations / Demo-Only Note
