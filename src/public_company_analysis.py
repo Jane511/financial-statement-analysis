@@ -43,8 +43,10 @@ INPUT_PATH = BASE_DIR / "data" / "public_listed_company_financials.csv"
 SOURCE_PATH = BASE_DIR / "data" / "public_listed_company_sources.csv"
 TABLE_DIR = BASE_DIR / "outputs" / "tables" / "public_company_analysis"
 REPORT_DIR = BASE_DIR / "outputs" / "reports" / "public_company_analysis"
-PDF_DIR = BASE_DIR / "Reports"
-ROOT_PDF_DIR = BASE_DIR
+CANONICAL_REPORTS_DIR = BASE_DIR / "reports"
+LEGACY_REPORTS_DIR = BASE_DIR / "Reports"
+PDF_DIR = CANONICAL_REPORTS_DIR / "public_company_analysis"
+PORTFOLIO_PDF_PATH = CANONICAL_REPORTS_DIR / "portfolio_overview.pdf"
 MPL_CONFIG_DIR = BASE_DIR / "outputs" / ".mplconfig"
 
 _CASHFLOW_LENDING_INDUSTRY_MAP = {
@@ -160,6 +162,7 @@ def rename_period_columns(df: pd.DataFrame, year_map: dict[str, int]) -> pd.Data
 
 def ensure_output_dirs() -> None:
     """Create output folders if they do not already exist."""
+    migrate_legacy_reports_dir()
     TABLE_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     PDF_DIR.mkdir(parents=True, exist_ok=True)
@@ -169,6 +172,42 @@ def ensure_output_dirs() -> None:
             lock_file.unlink()
         except PermissionError:
             pass
+
+
+def migrate_legacy_reports_dir() -> None:
+    """Move legacy Reports content into canonical reports directory."""
+    CANONICAL_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    PDF_DIR.mkdir(parents=True, exist_ok=True)
+    legacy_portfolio_pdf = BASE_DIR / "portfolio_overview.pdf"
+    if legacy_portfolio_pdf.exists() and not PORTFOLIO_PDF_PATH.exists():
+        legacy_portfolio_pdf.replace(PORTFOLIO_PDF_PATH)
+    if not LEGACY_REPORTS_DIR.exists():
+        return
+    try:
+        if LEGACY_REPORTS_DIR.resolve().samefile(CANONICAL_REPORTS_DIR.resolve()):
+            return
+    except OSError:
+        return
+    for item in LEGACY_REPORTS_DIR.iterdir():
+        if item.is_dir() and item.name == "public_company_analysis":
+            for child in item.iterdir():
+                child_target = PDF_DIR / child.name
+                if child_target.exists():
+                    continue
+                child.replace(child_target)
+            try:
+                item.rmdir()
+            except OSError:
+                pass
+            continue
+        target = CANONICAL_REPORTS_DIR / item.name
+        if target.exists():
+            continue
+        item.replace(target)
+    try:
+        LEGACY_REPORTS_DIR.rmdir()
+    except OSError:
+        pass
 
 
 def build_cashflow_lending_public_benchmark_exports(
@@ -971,7 +1010,7 @@ def write_portfolio_report(summary_df: pd.DataFrame) -> None:
     report = (
         "# Public Company Credit Portfolio Overview\n\n"
         "This file summarises the five selected listed companies analysed from the annual-report dataset. "
-        "Each company also has a standalone markdown credit review in this folder, a PDF version in the project root, "
+        "Each company also has a standalone markdown credit review in this folder, a PDF version in `reports/`, "
         "and detailed csv tables in `outputs/tables/public_company_analysis`.\n\n"
         + markdown_table(
             ["Company", "Industry", "Merton PD", "Grade", "Decision", "Indicative All-in Rate"],
@@ -986,7 +1025,7 @@ def write_portfolio_report(summary_df: pd.DataFrame) -> None:
             (
                 "body",
                 "This summary covers the five listed companies analysed from the annual-report dataset. Each "
-                "company also has a standalone PDF credit report in the project root.",
+                "company also has a standalone PDF credit report in `reports/public_company_analysis`.",
             ),
             *[
                 (
@@ -998,7 +1037,7 @@ def write_portfolio_report(summary_df: pd.DataFrame) -> None:
                 for _, row in summary_df.iterrows()
             ],
         ],
-        ROOT_PDF_DIR / "portfolio_overview.pdf",
+        PORTFOLIO_PDF_PATH,
     )
 
 
